@@ -84,6 +84,7 @@ public class ExternalSorting {
 		fa.close();
 		fb.close();
 		fc.close();
+		System.out.println("");
 		return nbrMonotonie; // TODO: A COMPLETER
 	}
 
