@@ -3,19 +3,19 @@ package s09;
 public class FindsBugs {
 
 	public static void main(String[] args) {
-		if(!findsBug01())
+		if (!findsBug01())
 			System.out.println("01 NO ERROR");
 		else
 			System.out.println("01 ERROR");
-		if(!findsBug02())
+		if (!findsBug02())
 			System.out.println("02 NO ERROR");
 		else
 			System.out.println("02 ERROR");
-		if(!findsBug03())
+		if (!findsBug03())
 			System.out.println("03 NO ERROR");
 		else
 			System.out.println("03 ERROR");
-		if(!findsBug04())
+		if (!findsBug04())
 			System.out.println("04 NO ERROR");
 		else
 			System.out.println("04 ERROR");
@@ -52,15 +52,15 @@ public class FindsBugs {
 			return true;
 		return false;
 	}
-	
+
 	static boolean findsBug04() {
 		IntStack s1 = new IntStack(10);
 		IntStack s2 = new IntStack(10);
 		s1.push(50);
 		s2.push(10);
-		if(s1.top()!=50)
+		if (s1.top() != 50)
 			return true;
-		if(s1.pop()!=50)
+		if (s1.pop() != 50)
 			return true;
 		if (!s1.isEmpty())
 			return true;
