@@ -19,6 +19,7 @@ public class FindsBugs {
 			System.out.println("04 NO ERROR");
 		else
 			System.out.println("04 ERROR");
+		System.out.println("voila");
 	}
 
 	static boolean findsBug01() {
