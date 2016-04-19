@@ -14,6 +14,7 @@ public class IntStack {
 	}
 
 	public boolean isEmpty() {
+		assert top <=0;
 		return top == -1;
 	}
 
