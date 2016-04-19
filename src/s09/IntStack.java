@@ -14,24 +14,42 @@ public class IntStack {
 	}
 
 	public boolean isEmpty() {
-		assert top <=0;
+		// Pré
+		assert this != null : "Object pas crée";
+		// Post
+
 		return top == -1;
 	}
 
 	public int top() {
+		// Pré
+		assert this != null : "Object pas crée";
+
+		
 		return buf[top];
+		// Post
 	}
 
 	public int pop() {
+		// Pré
+		assert this != null : "Object pas crée";
+
+		// Post
 		int a = buf[top];
 		top--;
 		return a;
 	}
 
 	public void push(int x) {
+		// Pré
+		assert this != null : "Object pas crée";
+
+		
 		checkSize();
 		top++;
 		buf[top] = x;
+		// Post
+		assert top == 0;
 	}
 
 	private void checkSize() {
