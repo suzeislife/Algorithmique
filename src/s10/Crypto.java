@@ -38,8 +38,8 @@ public class Crypto {
   // Out file :     original text
   public static void decrypt(String msgFile, String keyFile, String outFile) 
                              throws IOException {
-    BufferedReader fm = new BufferedReader(new FileReader(MsgFile));
-    BufferedReader fk = new BufferedReader(new FileReader(KeyFile));
+  //  BufferedReader fm = new BufferedReader(new FileReader(MsgFile));
+  //  BufferedReader fk = new BufferedReader(new FileReader(KeyFile));
     PrintWriter    fo = new PrintWriter   (new FileWriter(outFile));
     // TODO   A COMPLETER...
   }
