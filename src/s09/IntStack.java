@@ -9,32 +9,32 @@ public class IntStack {
 	}
 
 	public IntStack(int cap) {
+		// Pré
+		assert cap > 0 : "Taille du tableau inférieur a 0";
 		buf = new int[cap];
 		top = -1;
+		// Post
+		assert buf.length == cap : "Taille du tableau incorrect";
+		assert isEmpty() : "Tableau pas vide à la création";
 	}
 
 	public boolean isEmpty() {
 		// Pré
 		assert this != null : "Object pas crée";
 		// Post
-
 		return top == -1;
 	}
 
 	public int top() {
 		// Pré
 		assert this != null : "Object pas crée";
-
-		
+		assert buf[top + 1] == 0;
 		return buf[top];
-		// Post
 	}
 
 	public int pop() {
 		// Pré
 		assert this != null : "Object pas crée";
-
-		// Post
 		int a = buf[top];
 		top--;
 		return a;
@@ -43,13 +43,12 @@ public class IntStack {
 	public void push(int x) {
 		// Pré
 		assert this != null : "Object pas crée";
-
-		
 		checkSize();
 		top++;
 		buf[top] = x;
 		// Post
-		assert top == 0;
+		assert buf[top] == x : "Valeur incorrectement ajouté";
+		assert !this.isEmpty() : "tableau vide";
 	}
 
 	private void checkSize() {
