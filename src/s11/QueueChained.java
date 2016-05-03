@@ -2,14 +2,14 @@ package s11;
 
 import java.util.Random;
 
-public class IntQueueChained {
+public class QueueChained<E> {
 	// ======================================================================
-	private static class QueueNode {
-		final int elt;
+	private static class QueueNode<E> {
+		final E elt;
 		QueueNode next = null;
 
 		// ----------
-		QueueNode(int elt) {
+		QueueNode(E elt) {
 			this.elt = elt;
 		}
 	}
@@ -19,11 +19,11 @@ public class IntQueueChained {
 	private QueueNode back;
 
 	// ------------------------------
-	public IntQueueChained() {
+	public QueueChained() {
 	}
 
 	// --------------------------
-	public void enqueue(int elt) {
+	public void enqueue(E elt) {
 		QueueNode q = new QueueNode(elt);
 		if (back == null && front == null) {
 			back = q;
@@ -40,14 +40,14 @@ public class IntQueueChained {
 
 	// --------------------------
 	// PRE : !isEmpty()
-	public int consult() {
-		return front.elt;
+	public E consult() {
+		return (E) front.elt;
 	}
 
 	// --------------------------
 	// PRE : !isEmpty()
-	public int dequeue() {
-		int e = front.elt;
+	public E dequeue() {
+		E e = (E) front.elt;
 		if (front == back) {
 			back = null;
 			front = null;
@@ -78,7 +78,7 @@ public class IntQueueChained {
 		long seed = r.nextInt(1000);
 		r.setSeed(seed);
 		System.out.println("Using seed " + seed);
-		IntQueueChained q = new IntQueueChained();
+		QueueChained q = new QueueChained();
 		int m = 0;
 		int k = 0;
 		int p = 0;
@@ -95,7 +95,7 @@ public class IntQueueChained {
 					ok(q.isEmpty(), "should be empty " + m + " " + k + " " + p + "\n");
 				} else {
 					ok(!q.isEmpty(), "should be non-empty " + m + " " + k + " " + p + "\n");
-					int e = q.dequeue();
+					int e = (int) q.dequeue();
 					// System.out.print("r("+e+")");
 					m--;
 					ok(e == p + 1, "not FIFO " + m + " " + k + " " + p + "\n");

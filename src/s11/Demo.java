@@ -2,9 +2,9 @@ package s11;
 
 public class Demo {
   static void demo(int n) {
-    IntQueueChained f;
+    QueueChained<Integer> f;
     int i, sum = 0;
-    f = new IntQueueChained();
+    f = new QueueChained<>();
     for (i = 0; i < n; i++)
       f.enqueue(i);
     while (!f.isEmpty())
