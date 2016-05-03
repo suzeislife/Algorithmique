@@ -1,16 +1,25 @@
 package s12;
-public class BitSetOfShortsItr {
-  // TODO - A COMPLETER...
-  // ------------------------------------------------------------
-  public BitSetOfShortsItr (BitSetOfShorts theSet) {
-    // TODO - A COMPLETER...
-  }
 
-  public boolean hasMoreElements() {
-    return false; // TODO - A COMPLETER...
-  } 
-  public short   nextElement() {
-    return 0; // TODO - A COMPLETER...
-  } 
+public class BitSetOfShortsItr {
+	BitSetOfShorts theSet;
+	int next;
+
+	// ------------------------------------------------------------
+	public BitSetOfShortsItr(BitSetOfShorts theSet) {
+		this.theSet = theSet;
+		next = 0;
+	}
+
+	public boolean hasMoreElements() {
+		if (theSet.bs.get(next + 1))
+			return true;
+		return false; // TODO - A COMPLETER...
+	}
+
+	public short nextElement() {
+		if (hasMoreElements())
+			return (short) ++next;
+		return 0;
+	}
 
 }
