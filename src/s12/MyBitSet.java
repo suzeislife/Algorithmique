@@ -25,6 +25,7 @@ public class MyBitSet {
 		if (value) {
 			buffer[indexTable] |= mask;
 		} else {
+			mask = ~mask;
 			buffer[indexTable] &= mask;
 		}
 	}
@@ -59,6 +60,7 @@ public class MyBitSet {
 		checkSize(bitIndex);
 		int indexTable = bitIndex / NB_OF_BITS;
 		int nb = buffer[indexTable] >> bitIndex % NB_OF_BITS;
+		nb = nb & 1;
 		if (nb == 1) {
 			return true;
 		} else {
@@ -68,11 +70,8 @@ public class MyBitSet {
 
 	// ------------------------------------------------------------
 	public void and(MyBitSet o) {
-		int index = 0;
-		while (this.nextSetBit(index) >= 0) {
-			index = this.nextSetBit(index + 1);
-			if (!o.get(index))
-				this.set(index, false);
+		for (int i = 0; i < buffer.length; i++) {
+			buffer[i] = buffer[i] & o.buffer[i];
 		}
 	}
 
