@@ -11,14 +11,16 @@ public class BitSetOfShortsItr {
 	}
 
 	public boolean hasMoreElements() {
-		if (theSet.bs.get(next + 1))
+		if (theSet.bs.nextSetBit(next)>=0)
 			return true;
-		return false; // TODO - A COMPLETER...
+		return false;
 	}
 
 	public short nextElement() {
-		if (hasMoreElements())
-			return (short) ++next;
+		if (hasMoreElements()){
+			next = theSet.bs.nextSetBit(next);
+			return  theSet.eltFromIndex(next);
+		}
 		return 0;
 	}
 
