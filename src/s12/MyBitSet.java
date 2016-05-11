@@ -17,7 +17,7 @@ public class MyBitSet {
 
 	// ------------------------------------------------------------
 	public void set(int bitIndex, boolean value) { // bitIndex >= 0
-		
+
 		checkSize(bitIndex);
 		int indexTable = bitIndex / NB_OF_BITS;
 		int mask = 1;
@@ -56,29 +56,45 @@ public class MyBitSet {
 
 	// ------------------------------------------------------------
 	public boolean get(int bitIndex) {
+		checkSize(bitIndex);
 		int indexTable = bitIndex / NB_OF_BITS;
 		int nb = buffer[indexTable] >> bitIndex % NB_OF_BITS;
-		if(nb == 1){
+		if (nb == 1) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
 	// ------------------------------------------------------------
 	public void and(MyBitSet o) {
-		
-		// TODO - A COMPLETER...
+		int index = 0;
+		while (this.nextSetBit(index) >= 0) {
+			index = this.nextSetBit(index + 1);
+			if (!o.get(index))
+				this.set(index, false);
+		}
 	}
 
 	// ------------------------------------------------------------
 	public void or(MyBitSet o) {
-		// TODO - A COMPLETER...
+		int index = 0;
+		while (o.nextSetBit(index + 1) >= 0) {
+			index = this.nextSetBit(index + 1);
+			this.set(index);
+		}
 	}
 
 	// ------------------------------------------------------------
 	public void xor(MyBitSet o) {
-		// TODO - A COMPLETER...
+		int index = 0;
+		while (o.nextSetBit(index + 1) >= 0) {
+			index = this.nextSetBit(index + 1);
+			if (!this.get(index))
+				this.set(index);
+			else
+				this.set(index, false);
+		}
 	}
 
 	// ------------------------------------------------------------
@@ -97,14 +113,23 @@ public class MyBitSet {
 
 	// ------------------------------------------------------------
 	public int nextSetBit(int fromIndex) { // -1 if none
-		
-		return 0; // TODO - A COMPLETER...
+		for (int i = 0; i < buffer.length * NB_OF_BITS; i++) {
+			if (this.get(i))
+				return i;
+		}
+		return -1;
 	}
 
 	// ------------------------------------------------------------
 	public int cardinality() { // nb of bits set to true
-		
-		return 0; // TODO - A COMPLETER...
+		int compteur = 0;
+		for (int i = nextSetBit(0); i >= 0; i = nextSetBit(i + 1)) {
+			compteur++;
+			if (i == Integer.MAX_VALUE) {
+				break;
+			}
+		}
+		return compteur;
 	}
 
 	// ------------------------------------------------------------
