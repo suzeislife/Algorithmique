@@ -17,11 +17,10 @@ public class MyBitSet {
 
 	// ------------------------------------------------------------
 	public void set(int bitIndex, boolean value) { // bitIndex >= 0
-
-		checkSize(bitIndex);
 		int indexTable = bitIndex / NB_OF_BITS;
+		checkSize(indexTable);
 		int mask = 1;
-		mask = mask << bitIndex % NB_OF_BITS;
+		mask = mask << (bitIndex % NB_OF_BITS);
 		if (value) {
 			buffer[indexTable] |= mask;
 		} else {
@@ -57,42 +56,34 @@ public class MyBitSet {
 
 	// ------------------------------------------------------------
 	public boolean get(int bitIndex) {
-		checkSize(bitIndex);
 		int indexTable = bitIndex / NB_OF_BITS;
-		int nb = buffer[indexTable] >> bitIndex % NB_OF_BITS;
-		nb = nb & 1;
-		if (nb == 1) {
+		checkSize(indexTable);
+		int nb = buffer[indexTable] >> (bitIndex % NB_OF_BITS);
+		nb &= 1;
+		if (nb == 1)
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	// ------------------------------------------------------------
 	public void and(MyBitSet o) {
 		for (int i = 0; i < buffer.length; i++) {
-			buffer[i] = buffer[i] & o.buffer[i];
+			buffer[i] &= o.buffer[i];
 		}
 	}
 
 	// ------------------------------------------------------------
 	public void or(MyBitSet o) {
-		int index = 0;
-		while (o.nextSetBit(index + 1) >= 0) {
-			index = this.nextSetBit(index + 1);
-			this.set(index);
+		for (int i = 0; i < buffer.length; i++) {
+			buffer[i] |= o.buffer[i];
 		}
 	}
 
 	// ------------------------------------------------------------
 	public void xor(MyBitSet o) {
-		int index = 0;
-		while (o.nextSetBit(index + 1) >= 0) {
-			index = this.nextSetBit(index + 1);
-			if (!this.get(index))
-				this.set(index);
-			else
-				this.set(index, false);
+		for (int i = 0; i < buffer.length; i++) {
+			buffer[i] ^= o.buffer[i];
 		}
 	}
 
@@ -112,7 +103,7 @@ public class MyBitSet {
 
 	// ------------------------------------------------------------
 	public int nextSetBit(int fromIndex) { // -1 if none
-		for (int i = 0; i < buffer.length * NB_OF_BITS; i++) {
+		for (int i = fromIndex; i < buffer.length * NB_OF_BITS; i++) {
 			if (this.get(i))
 				return i;
 		}
@@ -122,11 +113,10 @@ public class MyBitSet {
 	// ------------------------------------------------------------
 	public int cardinality() { // nb of bits set to true
 		int compteur = 0;
-		for (int i = nextSetBit(0); i >= 0; i = nextSetBit(i + 1)) {
-			compteur++;
-			if (i == Integer.MAX_VALUE) {
-				break;
-			}
+		int index = 0;
+		for (int i = 0; i < length(); i++) {
+			if (get(i))
+				compteur++;
 		}
 		return compteur;
 	}
@@ -147,7 +137,7 @@ public class MyBitSet {
 	public static void main(String[] args) {
 		MyBitSet a = new MyBitSet(100);
 		ok(a.length() == 0);
-		System.out.println(a);
+		System.out.println(a.toString());
 		a.set(4);
 		ok(a.get(4));
 		ok(!a.get(3));
