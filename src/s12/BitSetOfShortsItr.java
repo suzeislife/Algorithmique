@@ -7,20 +7,21 @@ public class BitSetOfShortsItr {
 	// ------------------------------------------------------------
 	public BitSetOfShortsItr(BitSetOfShorts theSet) {
 		this.theSet = theSet;
-		next = 0;
+		next = -1;
 	}
 
 	public boolean hasMoreElements() {
-		if (theSet.bs.nextSetBit(next)>=0)
+		if (theSet.bs.nextSetBit(next+1)>=0)
 			return true;
 		return false;
 	}
 
 	public short nextElement() {
 		if (hasMoreElements()){
-			next = theSet.bs.nextSetBit(next);
-			return  theSet.eltFromIndex(next);
+			next = theSet.bs.nextSetBit(next+1);
+			return  BitSetOfShorts.eltFromIndex(next);
 		}
+		next = Integer.MAX_VALUE;
 		return 0;
 	}
 

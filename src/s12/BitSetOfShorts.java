@@ -68,23 +68,21 @@ public class BitSetOfShorts {
 
 	// ------------------------------------------------------------
 	// ------------------------------------------------------------
-	public static void main(String[] args) {
-		BitSetOfShorts a = new BitSetOfShorts();
-		BitSetOfShorts b = new BitSetOfShorts();
-		short[] ta = { -3, 5, 6, -3, 9, 9 };
-		short[] tb = { 6, 7, -2, -3 };
-		int i;
-		for (i = 0; i < ta.length; i++) {
-			a.add(ta[i]);
-			System.out.println("" + a + a.size());
-		}
-		System.out.println();
-		for (i = 0; i < tb.length; i++) {
-			b.add(tb[i]);
-			System.out.println("" + b + b.size());
-		}
-		System.out.println();
-		a.union(b);
-		System.out.println("" + a + a.size());
-	}
+	public static void main(String [] args) {
+	    BitSetOfShorts a = new BitSetOfShorts();
+	    BitSetOfShorts b = new BitSetOfShorts();
+	    short [] ta = {-3, 5, 6, -3, 9, 9};
+	    short [] tb = {6, 7, -2, -3};
+	    int i;
+	    for (i=0; i<ta.length; i++) {
+	      a.add(ta[i]);
+	      System.out.println(""+a+ a.size());
+	    }
+	    for (i=0; i<tb.length; i++) {
+	      b.add(tb[i]);
+	      System.out.println(""+b+ b.size());
+	    }
+	    a.union(b);
+	    System.out.println(""+a+ a.size());
+	  }
 }
