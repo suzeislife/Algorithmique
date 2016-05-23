@@ -10,7 +10,11 @@ public class BuggySorting {
       t = a[0];
       a[0] = a[1];
       a[1] = t;
+<<<<<<< HEAD
     } 
+=======
+    }
+>>>>>>> branch 'master' of https://github.com/suzeislife/Algorithmique.git
     for (i = 0; i < a.length - 1; i++) {
       min = i;
       for (j = i + 1; j < a.length; j++)
